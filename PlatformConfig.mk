@@ -115,4 +115,6 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
+TARGET_USES_CASH_EXTENSION := true
+
 include device/sony/common/CommonConfig.mk
