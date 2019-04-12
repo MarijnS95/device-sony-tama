@@ -21,6 +21,7 @@ KERNEL_PATH := kernel/sony/msm-$(SOMC_KERNEL_VERSION)
 
 $(call inherit-product, device/sony/common/common.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_o.mk)
 $(call inherit-product, $(PLATFORM_COMMON_PATH)/recovery/twrp.mk)
 
 SONY_ROOT := $(PLATFORM_COMMON_PATH)/rootdir
@@ -32,8 +33,6 @@ DEVICE_PACKAGE_OVERLAYS += \
 # A/B support
 AB_OTA_UPDATER := true
 TARGET_USES_HARDWARE_QCOM_BOOTCTRL := true
-
-PRODUCT_SHIPPING_API_LEVEL := 26
 
 # A/B OTA dexopt package
 PRODUCT_PACKAGES += \
