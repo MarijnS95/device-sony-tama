@@ -46,6 +46,70 @@
         <!-- Primary Audio HAL -->
         <module name="primary" halVersion="2.0">
             <xi:include href="common_primary_audio_policy_configuration.xml" xpointer="xpointer(/module/*)" />
+
+            <!-- NOTE: This configuration applies to both CAF and AOSP, but should not go in common
+                 which is shared with the a2dp_offload_disabled fallback -->
+
+            <!-- TODO: Below policy works on AOSP. The new policy has more features but comes from CAF directly. -->
+            <!-- <devicePorts>
+                <devicePort tagName="BT A2DP Out" type="AUDIO_DEVICE_OUT_BLUETOOTH_A2DP" role="sink"
+                            encodedFormats="AUDIO_FORMAT_LDAC AUDIO_FORMAT_APTX AUDIO_FORMAT_APTX_HD AUDIO_FORMAT_AAC AUDIO_FORMAT_SBC">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="44100,48000,88200,96000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </devicePort>
+                <devicePort tagName="BT A2DP Headphones" type="AUDIO_DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES" role="sink"
+                            encodedFormats="AUDIO_FORMAT_LDAC AUDIO_FORMAT_APTX AUDIO_FORMAT_APTX_HD AUDIO_FORMAT_AAC AUDIO_FORMAT_SBC">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="44100,48000,88200,96000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </devicePort>
+                <devicePort tagName="BT A2DP Speaker" type="AUDIO_DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER" role="sink"
+                            encodedFormats="AUDIO_FORMAT_LDAC AUDIO_FORMAT_APTX AUDIO_FORMAT_APTX_HD AUDIO_FORMAT_AAC AUDIO_FORMAT_SBC">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="44100,48000,88200,96000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </devicePort>
+            </devicePorts>
+
+            <routes>
+                <route type="mix" sink="BT A2DP Out"
+                       sources="primary output,deep_buffer,compressed_offload"/>
+                <route type="mix" sink="BT A2DP Headphones"
+                       sources="primary output,deep_buffer,compressed_offload"/>
+                <route type="mix" sink="BT A2DP Speaker"
+                       sources="primary output,deep_buffer,compressed_offload"/>
+            </routes> -->
+
+            <devicePorts>
+                <devicePort tagName="BT A2DP Out" type="AUDIO_DEVICE_OUT_BLUETOOTH_A2DP" role="sink"
+                            encodedFormats="AUDIO_FORMAT_SBC AUDIO_FORMAT_AAC AUDIO_FORMAT_APTX AUDIO_FORMAT_APTX_HD AUDIO_FORMAT_LDAC AUDIO_FORMAT_CELT AUDIO_FORMAT_APTX_ADAPTIVE">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </devicePort>
+                <devicePort tagName="BT A2DP Headphones" type="AUDIO_DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES" role="sink"
+                            encodedFormats="AUDIO_FORMAT_SBC AUDIO_FORMAT_AAC AUDIO_FORMAT_APTX AUDIO_FORMAT_APTX_HD AUDIO_FORMAT_LDAC AUDIO_FORMAT_CELT AUDIO_FORMAT_APTX_ADAPTIVE">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </devicePort>
+                <devicePort tagName="BT A2DP Speaker" type="AUDIO_DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER" role="sink"
+                            encodedFormats="AUDIO_FORMAT_SBC AUDIO_FORMAT_AAC AUDIO_FORMAT_APTX AUDIO_FORMAT_APTX_HD AUDIO_FORMAT_LDAC AUDIO_FORMAT_CELT AUDIO_FORMAT_APTX_ADAPTIVE">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </devicePort>
+            </devicePorts>
+
+            <routes>
+                <route type="mix" sink="BT A2DP Out"
+                       sources="primary output,deep_buffer,direct_pcm,compressed_offload"/>
+                <route type="mix" sink="BT A2DP Headphones"
+                       sources="primary output,deep_buffer,direct_pcm,compressed_offload"/>
+                <route type="mix" sink="BT A2DP Speaker"
+                       sources="primary output,deep_buffer,direct_pcm,compressed_offload"/>
+            </routes>
         </module>
 
         <!-- A2dp Input Audio HAL -->
@@ -57,9 +121,8 @@
         <!-- Remote Submix Audio HAL -->
         <xi:include href="r_submix_audio_policy_configuration.xml" />
 
-        <!-- Bluetooth Audio HAL -->
-        <xi:include href="bluetooth_audio_policy_configuration.xml" />
-
+        <!-- Bluetooth Audio HAL for Hearing aid -->
+        <xi:include href="bluetooth_hearing_aid_audio_policy_configuration.xml"/>
     </modules>
     <!-- End of Modules section -->
 
