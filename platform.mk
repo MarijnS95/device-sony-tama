@@ -103,6 +103,7 @@ PRODUCT_PACKAGES += \
     update_engine_client \
     update_engine_sideload \
     update_verifier \
+    bootctl \
     bootctrl.sdm845 \
     bootctrl.sdm845.recovery
 
