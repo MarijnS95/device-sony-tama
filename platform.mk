@@ -15,6 +15,10 @@
 # Platform path
 PLATFORM_COMMON_PATH := device/sony/tama
 
+TARGET_BOARD_PLATFORM := sdm845
+TARGET_USES_TAD_V2 := true
+WIFI_DRIVER_BUILT := qca_cld3
+
 SOMC_PLATFORM := tama
 SOMC_KERNEL_VERSION := 4.14
 
